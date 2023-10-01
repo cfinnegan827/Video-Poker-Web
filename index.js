@@ -1,27 +1,28 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"; // Import Firestore specific functions
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCUm9GSSY6J-702ah8vW7cKgIrZ97BJqys",
-  authDomain: "video-poker-web.firebaseapp.com",
-  projectId: "video-poker-web",
-  storageBucket: "video-poker-web.appspot.com",
-  messagingSenderId: "723228376471",
-  appId: "1:723228376471:web:36f3069f5fb83e266258d2"
-};
+    apiKey: "AIzaSyCUm9GSSY6J-702ah8vW7cKgIrZ97BJqys",
+    authDomain: "video-poker-web.firebaseapp.com",
+    projectId: "video-poker-web",
+    storageBucket: "video-poker-web.appspot.com",
+    messagingSenderId: "723228376471",
+    appId: "1:723228376471:web:36f3069f5fb83e266258d2"
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = firebase.auth()
-const database = firebase.database()
+const db = getFirestore(app); // Initialize Firestore
+const auth = app.auth(); // Use auth() method of the initialized app
 
-function register(){
-  window.location.href('register.html')
+function register() {
+  window.location.href = 'register.html'; // Fixed the syntax for changing location
 }
 
-async function login(){ 
+async function login() {
   try {
     const username = document.getElementById("username").value;
-    const password = document.getElementById("password-login").value;
+    const password = document.getElementById("password").value; // Corrected the id attribute
 
     // Query Firestore to retrieve the user document with the provided username
     const userDoc = await getDoc(doc(db, 'Profiles', username));
@@ -33,13 +34,12 @@ async function login(){
       if (password === userData.Password) {
         // Passwords match, user is authenticated
         console.log('Login successful');
-        username = userData.Username;
-        console.log('Username after assignment:', username);
+        // You can set user information in localStorage or use other methods for session management
         window.location.href = "main.html";
       } else {
         console.log('Incorrect password');
-        window.alert("Wrong Password")
-        document.getElementById("password-login").value = '';
+        window.alert("Wrong Password");
+        document.getElementById("password").value = ''; // Corrected the id attribute
       }
     } else {
       console.log('User not found');
