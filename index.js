@@ -20,10 +20,10 @@ function register() {
 }
 
 async function login() {
-  try {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value; // Corrected the id attribute
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value; // Corrected the id attribute
 
+  try {
     // Query Firestore to retrieve the user document with the provided username
     const userDoc = await getDoc(doc(db, 'Profiles', username));
 
