@@ -50,3 +50,11 @@ async function login() {
     // Handle error, e.g., display an error message
   }
 }
+
+// Select the buttons by their IDs
+const loginButton = document.getElementById("loginButton");
+const registerButton = document.getElementById("registerButton");
+
+// Attach event listeners
+loginButton.addEventListener("click", login);
+registerButton.addEventListener("click", register);
