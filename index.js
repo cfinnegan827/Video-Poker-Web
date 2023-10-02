@@ -13,7 +13,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app); // Initialize Firestore
-const auth = app.auth(); // Use auth() method of the initialized app
 
 function register() {
   window.location.href = 'register.html'; // Fixed the syntax for changing location
